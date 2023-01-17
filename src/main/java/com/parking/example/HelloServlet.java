@@ -1,4 +1,4 @@
-package com.example.proiect;
+package com.parking.example;
 
 import java.io.*;
 
