@@ -39,6 +39,15 @@ public class Product {
     }
 
     private String category;
+    private Long price;
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
 
     @Basic
     public String getCategory() {

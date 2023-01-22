@@ -5,12 +5,14 @@ public class ProductDto {
     String name;
     String quantity;
     String category;
+    Long price;
 
-    public ProductDto(Long id, String name, String quantity, String category) {
+    public ProductDto(Long id, String name, String quantity, String category,Long price) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.category = category;
+        this.price=price;
     }
 
     public Long getId() {
@@ -44,4 +46,8 @@ public class ProductDto {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public Long getPrice() { return price; }
+
+    public void setPrice(Long price) { this.price = price; }
 }

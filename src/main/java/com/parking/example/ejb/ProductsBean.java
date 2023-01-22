@@ -39,7 +39,7 @@ public class ProductsBean {
         List<ProductDto> productDto;
         productDto = products
                 .stream()
-                .map(x -> new ProductDto(x.getId(), x.getName(), x.getQuantity(), x.getCategory())).collect(Collectors.toList());
+                .map(x -> new ProductDto(x.getId(), x.getName(), x.getQuantity(), x.getCategory(),x.getPrice())).collect(Collectors.toList());
         return productDto;
     }
 
@@ -55,7 +55,7 @@ public class ProductsBean {
     public ProductDto findById(Long productId) {
 
         Product product = entityManager.find(Product.class, productId);
-        ProductDto products = new ProductDto(product.getId(), product.getName(),product.getQuantity(), product.getCategory());
+        ProductDto products = new ProductDto(product.getId(), product.getName(),product.getQuantity(), product.getCategory(),product.getPrice());
 
         return products;
 
@@ -92,7 +92,7 @@ public class ProductsBean {
     }
     public ProductPhotoDto findPhotoByProductId(Integer productId) {
         List<ProductPhoto> photos = entityManager
-                .createQuery("SELECT p FROM ProductPhoto p where p.car.id = :id", ProductPhoto.class)
+                .createQuery("SELECT p FROM ProductPhoto p where p.product.id = :id", ProductPhoto.class)
                 .setParameter("id", productId)
                 .getResultList();
         if (photos.isEmpty()) {

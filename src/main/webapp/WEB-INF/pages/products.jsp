@@ -32,6 +32,12 @@
                             ${product.category}
                     </div>
                     <div class="col">
+                            ${product.quantity}
+                    </div>
+                    <div class="col">
+                            ${product.price}
+                    </div>
+                    <div class="col">
                         <img src="${pageContext.request.contextPath}/ProductPhoto?id=${product.id}" width="48"/>
                     </div>
 
