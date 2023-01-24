@@ -27,7 +27,8 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf
+("/")) eq '/cart.jsp' ? ' active' : ''}" aria-current="page" href="${pageContext.request.contextPath}/Cart">Cart</a>
         </li>
       </ul>
       <ul class="navbar-nav">

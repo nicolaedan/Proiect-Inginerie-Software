@@ -68,5 +68,7 @@ public class UserBean {
                 .setParameter("userIds",userIds).getResultList();
         return usernames;
     }
+
+
 }
 

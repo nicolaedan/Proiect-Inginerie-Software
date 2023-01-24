@@ -1,8 +1,10 @@
 package com.parking.example.ejb;
 
+import com.parking.example.common.ProductCartDto;
 import com.parking.example.common.ProductDto;
 import com.parking.example.common.ProductPhotoDto;
 import com.parking.example.entities.Product;
+import com.parking.example.entities.ProductCart;
 import com.parking.example.entities.ProductPhoto;
 import com.parking.example.entities.User;
 import jakarta.ejb.EJBException;
@@ -35,6 +37,24 @@ public class ProductsBean {
         }
     }
 
+    public List<ProductCartDto> findAllproductsByUser() {
+        LOG.info("findAllProductsByUser");
+        try {
+            TypedQuery<ProductCart> typedQuery =
+                    entityManager.createQuery("SELECT p FROM ProductCart p WHERE p.id_user = 1", ProductCart.class);
+            List<ProductCart> productsCart = typedQuery.getResultList();
+            return copyProductsCartToDto(productsCart);
+        } catch (Exception ex) {
+            throw new EJBException(ex);
+        }
+    }
+    private List<ProductCartDto> copyProductsCartToDto(List<ProductCart> productsCart) {
+        List<ProductCartDto> productCartDto;
+        productCartDto = productsCart
+                .stream()
+                .map(x -> new ProductCartDto(x.getId_product(), x.getId_user(), x.getState(), x.getId(),x.getQuantity())).collect(Collectors.toList());
+        return productCartDto;
+    }
     private List<ProductDto> copyProductsToDto(List<Product> products) {
         List<ProductDto> productDto;
         productDto = products
