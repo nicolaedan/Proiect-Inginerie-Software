@@ -6,13 +6,13 @@ import com.parking.example.common.ProductPhotoDto;
 import com.parking.example.entities.Product;
 import com.parking.example.entities.ProductCart;
 import com.parking.example.entities.ProductPhoto;
-import com.parking.example.entities.User;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
@@ -37,7 +37,7 @@ public class ProductsBean {
         }
     }
 
-    public List<ProductCartDto> findAllproductsByUser() {
+    public List<ProductCartDto> findAllproductsByUser(Principal userPrincipal) {
         LOG.info("findAllProductsByUser");
         try {
             TypedQuery<ProductCart> typedQuery =

@@ -2,7 +2,6 @@ package com.parking.example.servlets;
 
 import com.parking.example.common.ProductCartDto;
 import com.parking.example.common.ProductDto;
-import com.parking.example.common.UserDto;
 import com.parking.example.ejb.InvoiceBean;
 import com.parking.example.ejb.ProductsBean;
 import com.parking.example.ejb.UserBean;
@@ -25,29 +24,28 @@ public class Cart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<ProductCartDto> products=productsBean.findAllproductsByUser();
-        request.setAttribute("products",products);
+        List<ProductCartDto> products=productsBean.findAllproductsByUser(request.getUserPrincipal());
+
         if(!invoiceBean.getProductsIds().isEmpty())
         {
-            List<ProductCartDto> names=productsBean.findAllproductsByUser();
+            List<ProductCartDto> names=productsBean.findAllproductsByUser(request.getUserPrincipal());
             request.setAttribute("invoices",products);
         }
+        List<ProductDto> productsList=new ArrayList<ProductDto>();
 
+for(ProductCartDto pcd:products)
+{
+    productsList.add(productsBean.findById(pcd.getId()));
+    productsList.get(productsList.size()-1).setQuantity(pcd.getQuantity());
+    productsList.get(productsList.size()-1).setPrice(productsList.get(productsList.size()-1).getPrice()*Long.parseLong(pcd.getQuantity()));
+}
+        request.setAttribute("productsList",productsList);
         request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request,response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String[] userIdsAsString=request.getParameterValues("products_ids");
-        if(userIdsAsString!=null){
-            List<Long>userIds=new ArrayList<>();
-            for (String userIdAsString:userIdsAsString){
-                userIds.add(Long.parseLong(userIdAsString));
-            }
-            invoiceBean.getUserIds().addAll(userIds);
-        }
-        response.sendRedirect(request.getContextPath()+"/Users");
     }
     }
 
