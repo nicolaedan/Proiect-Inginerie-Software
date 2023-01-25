@@ -6,23 +6,23 @@
   <h1>Cart</h1>
 
   <div class="container text-center">
-    <c:forEach var="products" items="${products}">
+    <c:forEach var="productsList" items="${productsList}">
       <div class="row">
         <c:if test="${pageContext.request.isUserInRole('READ_USERS')}">
           <div class="col">
-            <input type="checkbox" name="products_ids" value="${products.id}"/>
+            <input type="checkbox" name="products_ids" value="${productsList.id}"/>
           </div>
           <div class="col">
-              ${products.id}
+              ${productsList.name}
           </div>
           <div class="col">
-              ${products.id_product}
+              ${productsList.category}
           </div>
           <div class="col">
-              ${products.state}
+              ${productsList.price}
           </div>
           <div class="col">
-              ${products.quantity}
+              ${productsList.quantity}
           </div>
         </c:if>
 

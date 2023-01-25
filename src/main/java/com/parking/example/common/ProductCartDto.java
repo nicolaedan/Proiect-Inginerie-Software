@@ -5,9 +5,10 @@ public class ProductCartDto {
     private Long id_user;
     private String state;
     private Long id;
-    private Long quantity;
+    private String quantity;
 
-    public ProductCartDto(Long id_product, Long id_user, String state, Long id, Long quantity) {
+
+    public ProductCartDto(Long id_product, Long id_user, String state, Long id, String quantity) {
         this.id_product = id_product;
         this.id_user = id_user;
         this.state = state;
@@ -47,11 +48,11 @@ public class ProductCartDto {
         this.id = id;
     }
 
-    public Long getQuantity() {
+    public String  getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 }
