@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"WRITE_Products"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"WRITE_PRODUCTS"}))
 @WebServlet(name = "AddProduct", value = "/AddProduct")
 public class AddProduct extends HttpServlet {
     @Inject
@@ -30,7 +30,8 @@ public class AddProduct extends HttpServlet {
         String name=request.getParameter("name");
         String quantity=request.getParameter("quantity");
         String category=request.getParameter("category");
-        productsBean.createProduct(name,quantity,category);
+        Long price= Long.valueOf(request.getParameter("price"));
+        productsBean.createProduct(name,quantity,category,price);
         response.sendRedirect(request.getContextPath()+"/Products");
 
     }

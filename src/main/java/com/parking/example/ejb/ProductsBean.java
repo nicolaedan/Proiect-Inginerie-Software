@@ -6,6 +6,7 @@ import com.parking.example.common.ProductPhotoDto;
 import com.parking.example.entities.Product;
 import com.parking.example.entities.ProductCart;
 import com.parking.example.entities.ProductPhoto;
+import com.parking.example.entities.User;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -37,11 +38,24 @@ public class ProductsBean {
         }
     }
 
-    public List<ProductCartDto> findAllproductsByUser(Principal userPrincipal) {
+    public Long getUserIdNyName(String name){
+        LOG.info("getUserIdNyName");
+        try {
+            TypedQuery<Long> typedQuery =
+                    entityManager.createQuery("SELECT u.id from User u where u.username=:name ", Long.class);
+            typedQuery.setParameter("name",name);
+            Long id_user=typedQuery.getSingleResult();
+            return id_user;
+        } catch (Exception ex) {
+            throw new EJBException(ex);
+        }
+    }
+    public List<ProductCartDto> findAllproductsByUser(Long  userPrincipal) {
         LOG.info("findAllProductsByUser");
         try {
             TypedQuery<ProductCart> typedQuery =
-                    entityManager.createQuery("SELECT p FROM ProductCart p WHERE p.id_user = 1", ProductCart.class);
+                    entityManager.createQuery("SELECT p FROM ProductCart p WHERE p.id_user = :userPrincipal", ProductCart.class);
+            typedQuery.setParameter("userPrincipal",userPrincipal);
             List<ProductCart> productsCart = typedQuery.getResultList();
             return copyProductsCartToDto(productsCart);
         } catch (Exception ex) {
@@ -63,12 +77,13 @@ public class ProductsBean {
         return productDto;
     }
 
-    public void createProduct(String name, String quantity, String category) {
+    public void createProduct(String name, String quantity, String category,Long price) {
         LOG.info("createProduct");
         Product product=new Product();
         product.setName(name);
         product.setQuantity(quantity);
         product.setCategory(category);
+        product.setPrice(price);
         entityManager.persist(product);
     }
 
@@ -81,12 +96,13 @@ public class ProductsBean {
 
     }
 
-    public void updateProduct(Long productId, String name, String quantity, String category) {
+    public void updateProduct(Long productId, String name, String quantity, String category,Long price) {
         LOG.info("updateProduct");
         Product product = entityManager.find(Product.class, productId);
         product.setName(name);
         product.setQuantity(quantity);
         product.setCategory(category);
+        product.setPrice(price);
     }
 
     public void deleteProductsByIds(Collection<Long> productIds) {

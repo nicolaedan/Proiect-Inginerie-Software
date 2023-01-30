@@ -4,30 +4,32 @@
 
 <t:pageTemplate pageTitle="Cart">
   <h1>Cart</h1>
-
+    <form method="POST" action="${pageContext.request.contextPath}/Cart">
+  <c:if test="${pageContext.request.isUserInRole('READ_PRODUCTS')}">
+      <button class="btn btn-danger" type="submit">Delete Products From Cart</button>
   <div class="container text-center">
+
     <c:forEach var="productsList" items="${productsList}">
       <div class="row">
-        <c:if test="${pageContext.request.isUserInRole('READ_USERS')}">
+
           <div class="col">
-            <input type="checkbox" name="products_ids" value="${productsList.id}"/>
+            <input type="checkbox" name="product_cart_id" value="${productsList.id}"/>
           </div>
-          <div class="col">
-              ${productsList.name}
+
+          <div class="col"> Name Product:  ${productsList.name}</div>
+          <div class="col">Category: ${productsList.category}</div>
+          <div class="col"> Price:   ${productsList.price}
           </div>
-          <div class="col">
-              ${productsList.category}
+          <div class="col">Qantity:  ${productsList.quantity}
           </div>
-          <div class="col">
-              ${productsList.price}
-          </div>
-          <div class="col">
-              ${productsList.quantity}
-          </div>
+      </div>
+         </c:forEach>
+  </div>
+      <div class="col" var="total_sum" item="${total_sum}">Total Price ${total_sum} </div>
         </c:if>
 
-      </div>
-    </c:forEach>
-  </div>
+
+
+
 
 </t:pageTemplate>

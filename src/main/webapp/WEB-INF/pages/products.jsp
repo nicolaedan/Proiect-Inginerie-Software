@@ -18,24 +18,21 @@
                 <div class="row">
                     <c:if test="${pageContext.request.isUserInRole('WRITE_PRODUCTS')}">
                     <div class="col">
-                        <input type="checkbox" name="product_ids" value="${product.id}"/>
+                        <input type="checkbox" name="products_ids" value="${product.id}"/>
 
                     </div>
                     </c:if>
-                    <div class="col">
-                            ${product.name}
+                    <div class="col" >
+                           Name product: ${product.name}
                     </div>
                     <div class="col">
-                            ${product.quantity}
+                        Quantity: ${product.quantity}
                     </div>
                     <div class="col">
-                            ${product.category}
+                        Category: ${product.category}
                     </div>
                     <div class="col">
-                            ${product.quantity}
-                    </div>
-                    <div class="col">
-                            ${product.price}
+                          Price:  ${product.price}
                     </div>
                     <div class="col">
                         <img src="${pageContext.request.contextPath}/ProductPhoto?id=${product.id}" width="48"/>
@@ -52,6 +49,13 @@
                         <a class="btn btn-secondary" href="${pageContext.request.contextPath}/EditProduct?id=${product.id}">Edit
                             Product</a>
                     </div>
+                    </c:if>
+
+
+                    <c:if test="${pageContext.request.isUserInRole('READ_PRODUCTS')}">
+                        <input type="number" name="qant${product.id}" placeholder="Qantity" />
+                        <button class=" col btn btn-primary btn-lg" type="submit" name="product_id" value="${product.id}"  >Add in Cart</button>
+
                     </c:if>
 
                 </div>
