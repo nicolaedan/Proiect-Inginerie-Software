@@ -1,6 +1,8 @@
 package com.parking.example.ejb;
 
+import com.parking.example.common.ProductDto;
 import com.parking.example.common.UserDto;
+import com.parking.example.entities.Product;
 import com.parking.example.entities.User;
 import com.parking.example.entities.UserGroup;
 import jakarta.ejb.EJBException;
@@ -39,7 +41,7 @@ public class UserBean {
         List<UserDto> userDto;
         userDto = users
                 .stream()
-                .map(x -> new UserDto(x.getEmail(), x.getPassword(), x.getUsername(), x.getId())).collect(Collectors.toList());
+                .map(x -> new UserDto(x.getEmail(), x.getPassword(), x.getUsername(), x.getId(),x.getMoney_deposited())).collect(Collectors.toList());
         return userDto;
     }
 
@@ -68,7 +70,27 @@ public class UserBean {
                 .setParameter("userIds",userIds).getResultList();
         return usernames;
     }
+    public Long getUserIdNyName(String name){
+        LOG.info("getUserIdNyName");
+        try {
+            TypedQuery<Long> typedQuery =
+                    entityManager.createQuery("SELECT u.id from User u where u.username=:name ", Long.class);
+            typedQuery.setParameter("name",name);
+            Long id_user=typedQuery.getSingleResult();
+            return id_user;
+        } catch (Exception ex) {
+            throw new EJBException(ex);
+        }
+    }
 
+//    public UserDto findById(Long userID) {
+//
+//        User user = entityManager.find(User.class, userID);
+//        User user1 = new User(user.getEmail(), user.getPassword(),user.getUsername(), user.getId(),user.getMoney_deposited());
+//
+//        return user1;
+//
+//    }
 
 
 }

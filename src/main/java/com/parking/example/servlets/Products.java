@@ -1,20 +1,14 @@
 package com.parking.example.servlets;
-
 import com.parking.example.common.ProductDto;
 import com.parking.example.ejb.CartBean;
 import com.parking.example.ejb.ProductsBean;
 import com.parking.example.ejb.UserBean;
-import com.parking.example.entities.ProductCart;
-import com.parking.example.entities.User;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import sun.awt.windows.WPrinterJob;
-
 import java.io.IOException;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +27,7 @@ public class Products extends HttpServlet {
     CartBean cartBean;
 
     @Inject
-    User user;
+    UserBean userBean;
 
     @Override
 
@@ -62,7 +56,7 @@ public class Products extends HttpServlet {
             String quantity=request.getParameter("qant"+productIdstr);
             if(!quantity.matches("[0-9]+")) {quantity="1";}
 
-            Long user=productsBean.getUserIdNyName(request.getUserPrincipal().getName());
+            Long user=userBean.getUserIdNyName(request.getUserPrincipal().getName());
             cartBean.addCart(productId,quantity,user);
 
         }

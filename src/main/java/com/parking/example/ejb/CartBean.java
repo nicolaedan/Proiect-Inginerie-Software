@@ -43,11 +43,41 @@ public class CartBean {
         entityManager.persist(productCart);
     }
 
-    public void deleteProductsCartByIds(Collection<Long> productIds) {
+    public void deleteProduct(Collection<Long> productIds) {
         LOG.info("deleteProductCartsByIds");
         for (Long productId : productIds) {
-            ProductDto product = entityManager.find(ProductDto.class, productId);
+            ProductCart product = entityManager.find(ProductCart.class, productId);
             entityManager.remove(product);
         }
     }
+
+    public void deleteProductsCartByIds(Collection<ProductCartDto> productIds) {
+        LOG.info("deleteProductCartsByIds");
+        for (ProductCartDto productId : productIds) {
+            ProductCart product = entityManager.find(ProductCart.class, productId.getId());
+            entityManager.remove(product);
+        }
+    }
+
+
+    public ProductDto findById(Long productId) {
+
+        Product product = entityManager.find(Product.class, productId);
+        ProductDto productscart = new ProductDto(product.getId(), product.getName(),product.getQuantity(), product.getCategory(),product.getPrice());
+
+        return productscart;
+
+    }
+    public void updateMoneyUser(Long productId,Long sum) {
+        LOG.info("updateProduct");
+        User user = entityManager.find(User.class, productId);
+        if(user.getMoney_deposited()>sum) {
+            user.setMoney_deposited(user.getMoney_deposited() - sum);
+        }
+        else {
+            //print error
+        }
+
+    }
+
 }

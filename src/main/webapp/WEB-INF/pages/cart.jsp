@@ -6,7 +6,7 @@
   <h1>Cart</h1>
     <form method="POST" action="${pageContext.request.contextPath}/Cart">
   <c:if test="${pageContext.request.isUserInRole('READ_PRODUCTS')}">
-      <button class="btn btn-danger" type="submit">Delete Products From Cart</button>
+      <button class="btn btn-danger" type="submit" name="submitdlt" value="submitdlt">Delete Products From Cart</button>
   <div class="container text-center">
 
     <c:forEach var="productsList" items="${productsList}">
@@ -25,8 +25,13 @@
       </div>
          </c:forEach>
   </div>
-      <div class="col" var="total_sum" item="${total_sum}">Total Price ${total_sum} </div>
+      <div class="col" name="total_sum"  items="${total_sum}" value="${total_sum}" >Total Price ${total_sum} </div>
+      <input type="hidden" name="total_sum" value="${total_sum}"/>
+      <input type="hidden" name="productsid" value="${productsid}"/>
+<%--      <input type="hidden" name="qant_prod" value="${qant_prod}"/>--%>
+      <button class="btn btn-danger" type="submit" name="submitbuy" value="submitbuy"/>Buy</button>
         </c:if>
+      </form>
 
 
 
