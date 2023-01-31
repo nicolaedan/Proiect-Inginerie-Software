@@ -4,30 +4,37 @@
 
 <t:pageTemplate pageTitle="Cart">
   <h1>Cart</h1>
-
+    <form method="POST" action="${pageContext.request.contextPath}/Cart">
+  <c:if test="${pageContext.request.isUserInRole('READ_PRODUCTS')}">
+      <button class="btn btn-danger" type="submit" name="submitdlt" value="submitdlt">Delete Products From Cart</button>
   <div class="container text-center">
+
     <c:forEach var="productsList" items="${productsList}">
       <div class="row">
-        <c:if test="${pageContext.request.isUserInRole('READ_USERS')}">
-          <div class="col">
-            <input type="checkbox" name="products_ids" value="${productsList.id}"/>
-          </div>
-          <div class="col">
-              ${productsList.name}
-          </div>
-          <div class="col">
-              ${productsList.category}
-          </div>
-          <div class="col">
-              ${productsList.price}
-          </div>
-          <div class="col">
-              ${productsList.quantity}
-          </div>
-        </c:if>
 
+          <div class="col">
+            <input type="checkbox" name="product_cart_id" value="${productsList.id}"/>
+          </div>
+
+          <div class="col"> Name Product:  ${productsList.name}</div>
+          <div class="col">Category: ${productsList.category}</div>
+          <div class="col"> Price:   ${productsList.price}
+          </div>
+          <div class="col">Qantity:  ${productsList.quantity}
+          </div>
       </div>
-    </c:forEach>
+         </c:forEach>
   </div>
+      <div class="col" name="total_sum"  items="${total_sum}" value="${total_sum}" >Total Price ${total_sum} </div>
+      <input type="hidden" name="total_sum" value="${total_sum}"/>
+      <input type="hidden" name="productsid" value="${productsid}"/>
+<%--      <input type="hidden" name="qant_prod" value="${qant_prod}"/>--%>
+      <button class="btn btn-danger" type="submit" name="submitbuy" value="submitbuy"/>Buy</button>
+        </c:if>
+      </form>
+
+
+
+
 
 </t:pageTemplate>

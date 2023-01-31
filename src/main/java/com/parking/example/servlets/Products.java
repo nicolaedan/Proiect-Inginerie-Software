@@ -1,16 +1,19 @@
 package com.parking.example.servlets;
-
 import com.parking.example.common.ProductDto;
+import com.parking.example.ejb.CartBean;
 import com.parking.example.ejb.ProductsBean;
+import com.parking.example.ejb.UserBean;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+
 @DeclareRoles({"READ_PRODUCTS", "WRITE_PRODUCTS"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_PRODUCTS"}),
         httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
@@ -19,6 +22,13 @@ import java.util.List;
 public class Products extends HttpServlet {
     @Inject
     ProductsBean productsBean;
+
+    @Inject
+    CartBean cartBean;
+
+    @Inject
+    UserBean userBean;
+
     @Override
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +46,21 @@ public class Products extends HttpServlet {
                 productIds.add(Long.parseLong(productIdAsString));
             }
             productsBean.deleteProductsByIds(productIds);
+
         }
+
+       String productIdstr = request.getParameter("product_id");
+        if (productIdstr != null)
+        {
+            Long productId= Long.valueOf(productIdstr);
+            String quantity=request.getParameter("qant"+productIdstr);
+            if(!quantity.matches("[0-9]+")) {quantity="1";}
+
+            Long user=userBean.getUserIdNyName(request.getUserPrincipal().getName());
+            cartBean.addCart(productId,quantity,user);
+
+        }
+
         response.sendRedirect(request.getContextPath()+"/Products");
     }
 }

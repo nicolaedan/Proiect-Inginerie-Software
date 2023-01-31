@@ -34,6 +34,16 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="category">Price</label>
+        <input type="text" class="form-control" id="price" name="price" placeholder="" value="${product.price}" required>
+        <div class="invalid-feedback">
+          Price is required.
+        </div>
+      </div>
+    </div>
+
     <input type="hidden" name="product_id" value="${product.id}"/>
     <div >
       <button class=" btn btn-primary btn-lg" type="submit">Save</button>
