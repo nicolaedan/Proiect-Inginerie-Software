@@ -32,6 +32,17 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="money_deposited">Money Deposited</label>
+                <input type="text" class="form-control" id="money_deposited" name="money_deposited" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    Money Deposited is required.
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="user_groups">Groups</label>

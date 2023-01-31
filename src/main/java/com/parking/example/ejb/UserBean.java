@@ -46,12 +46,13 @@ public class UserBean {
     }
 
 
-    public void createUser(String username, String email, String password, Collection<String> groups) {
+    public void createUser(String username, String email, String password,Long money_deposited, Collection<String> groups) {
         LOG.info("createUser");
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setEmail(email);
         newUser.setPassword(passwordBean.convertToSha256(password));
+        newUser.setMoney_deposited(money_deposited);
         entityManager.persist(newUser);
         assignGroupsToUser(username, groups);
     }

@@ -31,10 +31,11 @@ public class AddUser extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String[] userGroups = request.getParameterValues("user_groups");
+        Long money_deposited=Long.valueOf(request.getParameter("money_deposited"));
         if (userGroups == null) {
             userGroups = new String[0];
         }
-        usersBean.createUser(username, email, password, Arrays.asList(userGroups));
+        usersBean.createUser(username, email, password,money_deposited, Arrays.asList(userGroups));
         response.sendRedirect(request.getContextPath() + "/Users");
     }
 

@@ -90,7 +90,6 @@ public class Cart extends HttpServlet {
             User user = entityManager.find(User.class, userid);
             if(user.getMoney_deposited()>sum)
             {
-              //  user.setMoney_deposited(user.getMoney_deposited() - sum);
                 cartBean.updateMoneyUser(userid, sum);
 
                 String user_name = request.getUserPrincipal().getName();
