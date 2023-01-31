@@ -44,9 +44,9 @@ public class Products extends HttpServlet {
             List<Long> productIds=new ArrayList<>();
             for(String productIdAsString :productIdsAsString){
                 productIds.add(Long.parseLong(productIdAsString));
+                cartBean.deleteProduct(productsBean.findProductInCart(Long.parseLong(productIdAsString)));
             }
             productsBean.deleteProductsByIds(productIds);
-
         }
 
        String productIdstr = request.getParameter("product_id");

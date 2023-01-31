@@ -37,6 +37,17 @@ public class ProductsBean {
             throw new EJBException(ex);
         }
     }
+    public List<Long> findProductInCart(Long id_product){
+        try {
+            TypedQuery<Long> typedQuery =
+                    entityManager.createQuery("SELECT c.id from ProductCart c where c.id_product=:id_product ", Long.class);
+            typedQuery.setParameter("id_product",id_product);
+            List<Long> productListInCart=typedQuery.getResultList();
+            return productListInCart;
+        } catch (Exception ex) {
+            throw new EJBException(ex);
+        }
+    }
 
     public Long getUserIdNyName(String name){
         LOG.info("getUserIdNyName");
