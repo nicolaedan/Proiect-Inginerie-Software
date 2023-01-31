@@ -138,5 +138,31 @@ public class ProductsBean {
         return new ProductPhotoDto(photo.getId(), photo.getFilename(), photo.getFiletype(),
                 photo.getFileContent());
     }
+public List< ProductDto> findAllProductsByCategory(String category){
 
+    LOG.info("findAllProductsByCategory");
+    try {
+        if(!category.equals("All")){
+        TypedQuery<Product> typedQuery =
+                entityManager.createQuery("SELECT p FROM Product p where p.category =:category", Product.class);
+        typedQuery.setParameter("category",category);
+        List<Product> products = typedQuery.getResultList();
+        return copyProductsToDto(products);}
+        else return findAllproducts();
+    } catch (Exception ex) {
+        throw new EJBException(ex);
+    }
+}
+    public List<String> findAllCategories(){
+        LOG.info("findAllCategories");
+        try {
+            TypedQuery<String> typedQuery =
+                    entityManager.createQuery("SELECT DISTINCT p.category  FROM Product p", String.class);
+
+            List<String> products = typedQuery.getResultList();
+            return products;
+        } catch (Exception ex) {
+            throw new EJBException(ex);
+        }
+    }
 }
