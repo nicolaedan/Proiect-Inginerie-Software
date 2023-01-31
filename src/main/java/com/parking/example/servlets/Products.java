@@ -15,9 +15,9 @@ import java.util.List;
 
 
 @DeclareRoles({"READ_PRODUCTS", "WRITE_PRODUCTS"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_PRODUCTS"}),
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_PRODUCTS","WRITE_PRODUCTS"}),
         httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
-                {"WRITE_PRODUCTS"})})
+                {"READ_PRODUCTS","WRITE_PRODUCTS"})})
 @WebServlet(name = "Products", value = "/Products")
 public class Products extends HttpServlet {
     @Inject

@@ -27,9 +27,11 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
+          <c:if test="${pageContext.request.isUserInRole('READ_PRODUCTS')}">
           <a class="nav-link${pageContext.request.requestURI.substring(pageContext.request.requestURI.lastIndexOf
 ("/")) eq '/cart.jsp' ? ' active' : ''}" aria-current="page" href="${pageContext.request.contextPath}/Cart">Cart</a>
         </li>
+        </c:if>
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">

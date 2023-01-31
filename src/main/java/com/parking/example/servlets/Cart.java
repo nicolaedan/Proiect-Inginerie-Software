@@ -16,10 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@DeclareRoles({"READ_PRODUCTS", "WRITE_PRODUCTS"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_PRODUCTS"}),
-        httpMethodConstraints = {@HttpMethodConstraint(value = "POST", rolesAllowed =
-                {"WRITE_PRODUCTS"})})
+
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"READ_PRODUCTS"}))
 @WebServlet(name = "Cart", value = "/Cart")
 public class Cart extends HttpServlet {
     @PersistenceContext
