@@ -17,18 +17,16 @@
           </div>
 
           <div class="col"> Name Product:  ${productsList.name}</div>
-          <div class="col">Category: ${productsList.category}</div>
-          <div class="col"> Price:   ${productsList.price}
-          </div>
-          <div class="col">Qantity:  ${productsList.quantity}
-          </div>
+          <div class="col">Price: ${price_inc}</div>
+          <div class="col">Qantity:  ${productsList.quantity}</div>
+          <div class="col"> Subtotal:   ${productsList.price}</div>
+
       </div>
          </c:forEach>
   </div>
-      <div class="col" name="total_sum"  items="${total_sum}" value="${total_sum}" >Total Price ${total_sum} </div>
+      <div class="col" name="total_sum"  items="${total_sum}" value="${total_sum}" >Order Total ${total_sum} </div>
       <input type="hidden" name="total_sum" value="${total_sum}"/>
       <input type="hidden" name="productsid" value="${productsid}"/>
-<%--      <input type="hidden" name="qant_prod" value="${qant_prod}"/>--%>
       <button class="btn btn-danger" type="submit" name="submitbuy" value="submitbuy"/>Buy</button>
         </c:if>
       </form>

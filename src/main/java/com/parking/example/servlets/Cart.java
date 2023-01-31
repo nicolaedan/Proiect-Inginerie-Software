@@ -38,12 +38,13 @@ public class Cart extends HttpServlet {
         List<Long> productsid=new ArrayList<Long>();
 
         Long total_sum=0L;
-       // Long qantity=0l;
+        Long price_inc=0l;
         for(ProductCartDto pcd:products)
         {if(productsBean.findById(pcd.getId_product())!=null)
         {
             productsList.add(productsBean.findById(pcd.getId_product()));
             productsList.get(productsList.size()-1).setQuantity(pcd.getQuantity());
+            price_inc=productsList.get(productsList.size()-1).getPrice();
             productsList.get(productsList.size()-1).setPrice(productsList.get(productsList.size()-1).getPrice()*Long.parseLong(pcd.getQuantity()));
              total_sum+=productsList.get(productsList.size()-1).getPrice();
              productsList.get(productsList.size()-1).setId(pcd.getId());
@@ -53,6 +54,7 @@ public class Cart extends HttpServlet {
         request.setAttribute("productsList",productsList);
         request.setAttribute("total_sum",total_sum);
         request.setAttribute("productsid",productsid);
+        request.setAttribute("price_inc",price_inc);
        // request.setAttribute("qant_prod",qantity);
         request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request,response);
 
