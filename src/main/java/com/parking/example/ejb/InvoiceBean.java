@@ -21,7 +21,8 @@ public class InvoiceBean implements Serializable {
         this.productsIds = productsIds;
     }
 
-    Set<Long> productsIds=new HashSet<>();
+    Set<Long> productsIds = new HashSet<>();
+
     public Set<Long> getUserIds() {
         return userIds;
     }
@@ -29,7 +30,8 @@ public class InvoiceBean implements Serializable {
     public void setUserIds(Set<Long> userIds) {
         this.userIds = userIds;
     }
-User user;
+
+    User user;
 
     public Long getId_user() {
         return user.getId();

@@ -19,7 +19,7 @@ public class PasswordBean {
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             byte[] digest = messageDigest.digest();
             final StringBuilder hexString = new StringBuilder();
-            for(int i=0;i<digest.length;i++) {
+            for (int i = 0; i < digest.length; i++) {
                 final String hex = Integer.toHexString(0xff & digest[i]);
                 if (hex.length() == 1) {
                     hexString.append('0');
@@ -27,7 +27,7 @@ public class PasswordBean {
                 hexString.append(hex);
             }
             return hexString.toString();
-        }catch (NoSuchAlgorithmException ex){
+        } catch (NoSuchAlgorithmException ex) {
             LOG.log(Level.SEVERE, "Could not convert password", ex);
         }
         return null;

@@ -39,6 +39,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     private String email;
     private String password;
 
@@ -57,9 +58,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
 
 
 }

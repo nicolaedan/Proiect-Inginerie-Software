@@ -80,4 +80,18 @@ public class CartBean {
 
     }
 
+    public void updateProducMinus1(Long productId) {
+        LOG.info("updateProduct");
+        ProductCart product = entityManager.find(ProductCart.class, productId);
+        if(Long.valueOf(product.getQuantity())>1) {
+            product.setQuantity(Long.toString(Long.valueOf(product.getQuantity()) - 1));
+        }
+
+    }
+    public void updateProducPlus1(Long productId) {
+        LOG.info("updateProduct");
+        ProductCart product = entityManager.find(ProductCart.class, productId);
+        product.setQuantity(Long.toString(Long.valueOf(product.getQuantity())+1));
+
+    }
 }

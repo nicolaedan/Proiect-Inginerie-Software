@@ -7,12 +7,12 @@ public class UserDto {
     Long id;
     Long money_deposited;
 
-    public UserDto(String email, String password, String username, Long id,Long money_deposited) {
+    public UserDto(String email, String password, String username, Long id, Long money_deposited) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.id = id;
-        this.money_deposited=money_deposited;
+        this.money_deposited = money_deposited;
     }
 
     public String getEmail() {

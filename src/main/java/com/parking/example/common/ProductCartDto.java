@@ -48,7 +48,7 @@ public class ProductCartDto {
         this.id = id;
     }
 
-    public String  getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
