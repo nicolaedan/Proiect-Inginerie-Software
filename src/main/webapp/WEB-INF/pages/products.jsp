@@ -3,6 +3,28 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:pageTemplate pageTitle="Products">
     <h1>Products</h1>
+    <form method="GET" action="${pageContext.request.contextPath}/SortByCategory">
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+
+                <select class="custom-select d-block w-100" id="Category" name="Category" >
+                    <c:if test="${First!='All'  }">
+                    <option value="${First}">${First}</option>
+</c:if>
+                    <option value="All">All</option>
+                    <c:forEach var="category_group" items="${categoryGroups}" varStatus="status">
+                        <c:if test="${First!=category_group  }">
+                        <option value="${category_group}">${category_group}</option>
+                        </c:if>
+                    </c:forEach>
+
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-danger" type="submit">Search</button>
+
+    </form>
     <form method="POST" action="${pageContext.request.contextPath}/Products">
         <c:if test="${pageContext.request.isUserInRole('WRITE_PRODUCTS')}">
             <a class=" btn btn-primary btn-lg" href="${pageContext.request.contextPath}/AddProduct">
