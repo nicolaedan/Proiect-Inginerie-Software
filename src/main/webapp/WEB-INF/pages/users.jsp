@@ -3,36 +3,31 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:pageTemplate pageTitle="Users">
-  <h1 class="padd-10">Users</h1>
+  <h1>Users</h1>
   <c:if test="${pageContext.request.isUserInRole('WRITE_USERS')}">
     <form method="POST" action="${pageContext.request.contextPath}/Users">
-    <a href="${pageContext.request.contextPath}/AddUser" class="button-f back-blue">Add User</a>
-    <button class="button-f back-r" type="submit">Invoice</button>
+    <a href="${pageContext.request.contextPath}/AddUser" class="btn btn-primary btn-lg">
+      Add User
+    </a>
+    <button class="btn btn-danger" type="submit">Invoice</button>
   </c:if>
-  <table class="padd-10 back-b back-grey">
-    <thead>
-    <td></td>
-    <td class="txt-c padd-5">Email</td>
-    <td class="txt-c padd-5">Username</td>
-    </thead>
-    <tbody>
+  <div class="container text-center">
     <c:forEach var="users" items="${users}">
-      <tr>
+      <div class="row">
         <c:if test="${pageContext.request.isUserInRole('READ_USERS')}">
-          <td class="padd-5">
+          <div class="col">
             <input type="checkbox" name="user_ids" value="${users.id}"/>
-          </td>
+          </div>
         </c:if>
-        <td class="txt-c padd-5">
+        <div class="col">
             ${users.email}
-        </td>
-        <td class="txt-c padd-5">
+        </div>
+        <div class="col">
             ${users.username}
-        </td>
-      </tr>
+        </div>
+      </div>
     </c:forEach>
-    </tbody>
-  </table>
+  </div>
   </form>
   <c:if test="${not empty invoices}">
     <h2>Invoices</h2>

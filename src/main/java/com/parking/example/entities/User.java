@@ -6,6 +6,17 @@ import java.util.Collection;
 
 @Entity
 public class User {
+
+    private Long money_deposited;
+
+    public Long getMoney_deposited() {
+        return money_deposited;
+    }
+
+    public void setMoney_deposited(Long money_deposited) {
+        this.money_deposited = money_deposited;
+    }
+
     private Long id;
 
     public void setId(Long id) {
@@ -28,6 +39,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     private String email;
     private String password;
 
@@ -46,9 +58,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
 
 
 }

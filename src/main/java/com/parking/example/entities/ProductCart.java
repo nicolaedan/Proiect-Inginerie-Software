@@ -1,8 +1,6 @@
 package com.parking.example.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ProductCart {
@@ -10,7 +8,7 @@ public class ProductCart {
     private Long id_user;
     private String state;
     private Long id;
-    private Long quantity;
+    private String quantity;
 
     public void setId(Long id) {
         this.id = id;
@@ -46,11 +44,13 @@ public class ProductCart {
         this.state = state;
     }
 
-    public Long getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
+
+
 }
