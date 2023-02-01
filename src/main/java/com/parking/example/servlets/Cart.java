@@ -92,6 +92,7 @@ public class Cart extends HttpServlet {
                 String user_name = request.getUserPrincipal().getName();
                 Long id_user = productsBean.getUserIdNyName(user_name);
                 List<ProductCartDto> productsList = productsBean.findAllproductsByUser(id_user);
+                productsBean.updeteProductQuantity(productsList);
                 cartBean.deleteProductsCartByIds(productsList);
             }
         }

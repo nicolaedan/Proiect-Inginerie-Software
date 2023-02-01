@@ -182,4 +182,14 @@ public List< ProductDto> findAllProductsByCategory(String category){
             throw new EJBException(ex);
         }
     }
+    public void updeteProductQuantity(List<ProductCartDto> ProductIdsList)
+    {
+        for (ProductCartDto product : ProductIdsList) {
+            Product ProductById = entityManager.find(Product.class, product.getId_product());
+            Long old_quantity= Long.valueOf(ProductById.getQuantity());
+            Long new_quantity =old_quantity-Long.parseLong(product.getQuantity());
+            ProductById.setQuantity(String.valueOf(new_quantity));
+
+        }
+    }
 }

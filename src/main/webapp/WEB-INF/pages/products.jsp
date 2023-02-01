@@ -8,14 +8,14 @@
         <div class="row">
             <div class="col-md-6 mb-3">
 
-                <select class="custom-select d-block w-100" id="Category" name="Category" >
+                <select class="custom-select d-block w-100" id="Category" name="Category">
                     <c:if test="${First!='All'  }">
-                    <option value="${First}">${First}</option>
-</c:if>
+                        <option value="${First}">${First}</option>
+                    </c:if>
                     <option value="All">All</option>
                     <c:forEach var="category_group" items="${categoryGroups}" varStatus="status">
                         <c:if test="${First!=category_group  }">
-                        <option value="${category_group}">${category_group}</option>
+                            <option value="${category_group}">${category_group}</option>
                         </c:if>
                     </c:forEach>
 
@@ -76,7 +76,7 @@
 
 
                     <c:if test="${pageContext.request.isUserInRole('READ_PRODUCTS')}">
-                        <input type="number" name="qant${product.id}" placeholder="Qantity"/>
+                        <input type="number" min="1" name="qant${product.id}" placeholder="Qantity"/>
                         <button class=" col btn btn-primary btn-lg" type="submit" name="product_id"
                                 value="${product.id}">Add in Cart
                         </button>

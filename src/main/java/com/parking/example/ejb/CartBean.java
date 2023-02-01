@@ -17,6 +17,7 @@ import jakarta.persistence.TypedQuery;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -24,22 +25,18 @@ import java.util.stream.Collectors;
 public class CartBean {
 
 
-
     private static final Logger LOG = Logger.getLogger(CartBean.class.getName());
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public void addCart(Long id_product,String quantity,Long id_user) {
+    public void addCart(Long id_product, String quantity, Long id_user) {
         LOG.info("Add in Cart");
 
-
-        ProductCart productCart=new ProductCart();
-
+        ProductCart productCart = new ProductCart();
         productCart.setId_product(id_product);
         productCart.setId_user(id_user);
         productCart.setQuantity(quantity);
-
         entityManager.persist(productCart);
     }
 
@@ -63,18 +60,18 @@ public class CartBean {
     public ProductDto findById(Long productId) {
 
         Product product = entityManager.find(Product.class, productId);
-        ProductDto productscart = new ProductDto(product.getId(), product.getName(),product.getQuantity(), product.getCategory(),product.getPrice());
+        ProductDto productscart = new ProductDto(product.getId(), product.getName(), product.getQuantity(), product.getCategory(), product.getPrice());
 
         return productscart;
 
     }
-    public void updateMoneyUser(Long productId,Long sum) {
+
+    public void updateMoneyUser(Long productId, Long sum) {
         LOG.info("updateProduct");
         User user = entityManager.find(User.class, productId);
-        if(user.getMoney_deposited()>sum) {
+        if (user.getMoney_deposited() > sum) {
             user.setMoney_deposited(user.getMoney_deposited() - sum);
-        }
-        else {
+        } else {
             //print error
         }
 
@@ -83,15 +80,16 @@ public class CartBean {
     public void updateProducMinus1(Long productId) {
         LOG.info("updateProduct");
         ProductCart product = entityManager.find(ProductCart.class, productId);
-        if(Long.valueOf(product.getQuantity())>1) {
+        if (Long.valueOf(product.getQuantity()) > 1) {
             product.setQuantity(Long.toString(Long.valueOf(product.getQuantity()) - 1));
         }
 
     }
+
     public void updateProducPlus1(Long productId) {
         LOG.info("updateProduct");
         ProductCart product = entityManager.find(ProductCart.class, productId);
-        product.setQuantity(Long.toString(Long.valueOf(product.getQuantity())+1));
+        product.setQuantity(Long.toString(Long.valueOf(product.getQuantity()) + 1));
 
     }
 }
