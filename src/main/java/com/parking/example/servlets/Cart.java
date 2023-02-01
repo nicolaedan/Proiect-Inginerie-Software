@@ -107,7 +107,10 @@ public class Cart extends HttpServlet {
             cartBean.updateProducMinus1(id_prd);
 
         }
-
+        String delete=request.getParameter("delete");
+        if (delete != null) {
+            cartBean.deleteProductsByIdFromCart(Long.valueOf(delete));
+        }
         String btnplus = request.getParameter("btnplus");
         if (btnplus != null) {
             Long id_prd = Long.valueOf(btnplus);

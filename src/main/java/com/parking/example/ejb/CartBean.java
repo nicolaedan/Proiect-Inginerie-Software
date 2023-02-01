@@ -56,7 +56,6 @@ public class CartBean {
         }
     }
 
-
     public ProductDto findById(Long productId) {
 
         Product product = entityManager.find(Product.class, productId);
@@ -91,5 +90,10 @@ public class CartBean {
         ProductCart product = entityManager.find(ProductCart.class, productId);
         product.setQuantity(Long.toString(Long.valueOf(product.getQuantity()) + 1));
 
+    }
+    public void deleteProductsByIdFromCart(Long productIds) {
+        LOG.info("deleteProductsByIds");
+        ProductCart product = entityManager.find(ProductCart.class, productIds);
+        entityManager.remove(product);
     }
 }
