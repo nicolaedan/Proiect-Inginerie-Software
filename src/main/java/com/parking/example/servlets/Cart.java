@@ -53,6 +53,9 @@ public class Cart extends HttpServlet {
                 productsid.add(pcd.getId());
             }
         }
+        Long userid = userBean.getUserIdNyName(request.getUserPrincipal().getName());
+        User user = entityManager.find(User.class, userid);
+        request.setAttribute("user_money", user.getMoney_deposited());
         request.setAttribute("productsList", productsList);
         request.setAttribute("total_sum", total_sum);
         request.setAttribute("productsid", productsid);
@@ -84,8 +87,8 @@ public class Cart extends HttpServlet {
 
             Long sum = Long.valueOf(request.getParameter("total_sum"));
             Long userid = userBean.getUserIdNyName(request.getUserPrincipal().getName());
-
             User user = entityManager.find(User.class, userid);
+
             if (user.getMoney_deposited() > sum) {
                 cartBean.updateMoneyUser(userid, sum);
 
