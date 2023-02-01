@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"WRITE_PRODUCTS"}))
 @MultipartConfig
-@WebServlet(name = "AddProductPhoto",value = "/AddProductPhoto")
+@WebServlet(name = "AddProductPhoto", value = "/AddProductPhoto")
 public class AddProductPhoto extends HttpServlet {
     @Inject
     ProductsBean productsBean;
@@ -26,25 +26,25 @@ public class AddProductPhoto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Long productId=Long.parseLong(request.getParameter("id"));
-        ProductDto product= productsBean.findById(productId);
-        request.setAttribute("product",product);
-        request.getRequestDispatcher("/WEB-INF/pages/addProductPhoto.jsp").forward(request,response);
+        Long productId = Long.parseLong(request.getParameter("id"));
+        ProductDto product = productsBean.findById(productId);
+        request.setAttribute("product", product);
+        request.getRequestDispatcher("/WEB-INF/pages/addProductPhoto.jsp").forward(request, response);
     }
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Long productId=Long.parseLong(request.getParameter("product_id"));
+        Long productId = Long.parseLong(request.getParameter("product_id"));
 
-        Part filePart=request.getPart("file");
-        String fileName=filePart.getSubmittedFileName();
-        String fileType=filePart.getContentType();
-        long fileSize=filePart.getSize();
-        byte[] fileContent=new byte[(int) fileSize];
+        Part filePart = request.getPart("file");
+        String fileName = filePart.getSubmittedFileName();
+        String fileType = filePart.getContentType();
+        long fileSize = filePart.getSize();
+        byte[] fileContent = new byte[(int) fileSize];
         filePart.getInputStream().read(fileContent);
 
-        productsBean.addPhotoToProduct(productId,fileName,fileType,fileContent);
-        response.sendRedirect(request.getContextPath()+"/Products");
+        productsBean.addPhotoToProduct(productId, fileName, fileType, fileContent);
+        response.sendRedirect(request.getContextPath() + "/Products");
     }
 }

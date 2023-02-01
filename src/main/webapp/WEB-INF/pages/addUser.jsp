@@ -26,12 +26,25 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="" value="" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="" value=""
+                       required>
                 <div class="invalid-feedback">
                     Password is required.
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="money_deposited">Money Deposited</label>
+                <input type="number" class="form-control" id="money_deposited" name="money_deposited" placeholder=""
+                       value="" required>
+                <div class="invalid-feedback">
+                    Money Deposited is required.
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="user_groups">Groups</label>
@@ -44,8 +57,8 @@
         </div>
 
         <hr class="mb-4">
-        <div >
-            <button  class=" btn btn-primary btn-lg" type="submit">Save</button>
+        <div>
+            <button class=" btn btn-primary btn-lg" type="submit">Save</button>
         </div>
 
     </form>

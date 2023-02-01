@@ -15,13 +15,13 @@
           <div class="col">
             <input type="checkbox" name="product_cart_id" value="${productsList.id}"/>
           </div>
-
           <div class="col"> Name Product:  ${productsList.name}</div>
-          <div class="col">Category: ${productsList.category}</div>
-          <div class="col"> Price:   ${productsList.price}
-          </div>
-          <div class="col">Qantity:  ${productsList.quantity}
-          </div>
+          <div class="col">Price: ${price_inc}</div>
+          <button id="minus" name="btnminus" value="${productsList.id}" style="height:25px;width:25px">−</button>
+          <div class="col">Quantity:  ${productsList.quantity}</div>
+          <button id="plus" name="btnplus" value="${productsList.id}" style="height:25px;width:25px">+</button>
+          <div class="col"> Subtotal:   ${productsList.price}</div>
+
       </div>
          </c:forEach>
   </div>

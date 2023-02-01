@@ -58,6 +58,7 @@ public class Product {
         this.category = category;
 
     }
+
     private ProductPhoto photo;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

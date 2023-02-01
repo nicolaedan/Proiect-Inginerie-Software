@@ -9,6 +9,7 @@ public class UserGroup {
     private Long id;
     private String username;
     private String userGroup;
+
     @Id
     @GeneratedValue
     public Long getId() {

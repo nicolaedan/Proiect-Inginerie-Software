@@ -8,8 +8,9 @@ public class ProductPhoto {
     private Long id;
     String filename;
     String filetype;
-    byte[ ] fileContent;
+    byte[] fileContent;
     Product product;
+
     @Id
     @GeneratedValue
     public Long getId() {
