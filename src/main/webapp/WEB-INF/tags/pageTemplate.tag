@@ -17,6 +17,8 @@
 
 <jsp:include page="/WEB-INF/pages/footer.jsp" />
 <script src="${pageContext.request.contextPath}/scripts/form-validation.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/Style.css" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
 
 </html>

@@ -33,7 +33,7 @@
       </div>
     </div>
     <div >
-      <button  class=" btn btn-primary btn-lg" type="submit">Save</button>
+      <button  class="button-f back-blue" type="submit">Save</button>
     </div>
 
   </form>
